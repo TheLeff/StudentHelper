@@ -22,7 +22,6 @@ public class SampleController {
     public TextField someField_6;
     public TextField someField_7;
 
-    public Label Licensekek;
 
     public ChoiceBox<Object> choice_1;
     public ChoiceBox<Object> choice_2;
@@ -33,15 +32,6 @@ public class SampleController {
     public ChoiceBox<Object> choice_7;
 
     static ArrayList<String> requiredNames = new ArrayList<>();
-
-    private void licenseFailed(){
-
-    }
-    private boolean checkLicense(){
-
-        return true;
-
-    }
 
     private void fillSlot(BufferedWriter bw, TextField someField, ChoiceBox<Object> choiceBox){
             try {
@@ -125,11 +115,9 @@ public class SampleController {
     }
     @FXML
     void writeFile(){
-//    void writeFile(ActionEvent actionEvent){
         int fieldAmount = 0;
 
         File file = new File(System.getProperty("user.home") +  "\\Desktop", "something.txt");
-
         try {
             if (!file.exists()) {
                 if(!file.createNewFile()){
@@ -141,14 +129,11 @@ public class SampleController {
             BufferedWriter bw = new BufferedWriter(fw);
             fieldAmount = fillStruct(bw);
             writeFunctions(fieldAmount, bw);
-
-
             bw.close();
         }
         catch(java.io.IOException e){
             e.printStackTrace();
         }
-
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Информация о работе программы");
         alert.setHeaderText("Программа создана!");
@@ -158,13 +143,11 @@ public class SampleController {
             alert.setContentText("Но структура пустая, так что попробуйте заново (нормально)!");
         alert.showAndWait().ifPresent(rs -> {
             if (rs == ButtonType.OK) {
-//                Runtime runtime = Runtime.getRuntime();
                 try {
                     String path = System.getProperty("user.home") +  "\\Desktop" + "\\"+ "something.txt";
                     ProcessBuilder pb = new ProcessBuilder("Notepad.exe", path);
                     pb.start();
 
-//                    Process process = runtime.exec("C:\\path\\to\\notepad.exe "+path);
                 }
                 catch(java.io.IOException e){
                     e.printStackTrace();
@@ -176,17 +159,8 @@ public class SampleController {
 
 
     private void init_choiceBoxes(){
-        final String FieldInt = "int";
-        final String FieldChar = "char";
-        final String FieldChar2 = "char[2]";
-        final String FieldChar5 = "char[5]";
-        final String FieldChar10 = "char[10]";
-        final String FieldChar20 = "char[20]";
-        final String FieldChar30 = "char[30]";
 
-        final Object ParamArray = new String[] {FieldInt, FieldChar, FieldChar2, FieldChar5, FieldChar10, FieldChar20, FieldChar30};
-
-
+        final String[] ParamArray = new String[] {"int", "char", "char[2]", "char[5]", "char[10]", "char[20]", "char[30]"};
 
         //I fixed it with generifying the whole class. I don't know what I've done but it works
 //        Warning:(198, 40) java: non-varargs call of varargs method with inexact argument type for last parameter;
@@ -206,26 +180,11 @@ public class SampleController {
 
     @FXML
     public void initialize(){
-
-        if(checkLicense()) {
             init_choiceBoxes();
-
-
-        }
-        else {
-            // something
-            licenseFailed();
-
-
-        }
     }
 
 
 
     public void something() {
-
-
-
-
     }
 }

@@ -102,7 +102,12 @@ class Functions {
     }
 
 
+    static void writeSearch(int fieldAmount, BufferedWriter bw, ArrayList requiredNames){
+
+    }
     // todo: search
+
+    // todo: all kinds of sorting
 
 //    int  option    = 0;
 //    int  phoneTemp = 0;

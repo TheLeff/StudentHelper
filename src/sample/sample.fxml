@@ -2,17 +2,14 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane focusTraversable="true" maxHeight="500.0" maxWidth="400.0" minHeight="465.0" minWidth="400.0" prefHeight="500.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.SampleController">
+<Pane focusTraversable="true" maxHeight="500.0" maxWidth="400.0" minHeight="465.0" minWidth="400.0" prefHeight="500.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.SampleController">
    <children>
       <Button fx:id="button_task7" layoutX="30.0" layoutY="25.0" mnemonicParsing="false" onAction="#something" scaleX="1.3" scaleY="1.3" text="Задача 7" textAlignment="CENTER" textOverrun="CLIP" />
       <Button fx:id="button_task9" layoutX="160.0" layoutY="25.0" mnemonicParsing="false" scaleX="1.3" scaleY="1.3" text="Задача 9" textAlignment="CENTER" textOverrun="CLIP" />
       <Button fx:id="button_task10" layoutX="290.0" layoutY="25.0" mnemonicParsing="false" scaleX="1.3" scaleY="1.3" text="Задача 10" textAlignment="CENTER" textOverrun="CLIP" />
-
-      <Label fx:id="Licensekek" layoutX="100.0" layoutY="480.0" text="Лицензия №: 162, код 0b2c189b2gsks41" />
        <TextField fx:id="someField_1" alignment="CENTER" layoutX="20.0" layoutY="90.0" promptText="Название поля" />
       <ChoiceBox fx:id="choice_1" layoutX="180.0" layoutY="90.0" prefWidth="150.0" />
        <TextField fx:id="someField_2" alignment="CENTER" layoutX="20.0" layoutY="130.0" promptText="Название поля" />
