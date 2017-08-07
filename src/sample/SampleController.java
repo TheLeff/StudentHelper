@@ -3,9 +3,7 @@ package sample;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
+import java.io.*;
 import java.util.ArrayList;
 
 public class SampleController {
@@ -31,6 +29,10 @@ public class SampleController {
     public ChoiceBox<Object> choice_6;
     public ChoiceBox<Object> choice_7;
 
+
+
+
+
     static ArrayList<String> requiredNames = new ArrayList<>();
 
     private void fillSlot(BufferedWriter bw, TextField someField, ChoiceBox<Object> choiceBox){
@@ -44,18 +46,23 @@ public class SampleController {
 
     private void writeFunctions(int fieldAmount, BufferedWriter bw){
 
-        Functions.namespaceSTD(bw);
-        Functions.outputEverything(bw);
-        Functions.outputOne(fieldAmount, bw);
-        Functions.inputAll(bw);
-        Functions.makeARecord(fieldAmount, bw, requiredNames);
-        Functions.hello(fieldAmount, bw, requiredNames);
-        Functions.writeMain(bw);
+        try {
+            Functions.namespaceSTD(bw);
+            Functions.outputEverything(bw);
+            Functions.outputOne(fieldAmount, bw);
+            Functions.inputAll(bw);
+            Functions.makeARecord(fieldAmount, bw, requiredNames);
+            Functions.hello(fieldAmount, bw, requiredNames);
+            Functions.writeMain(bw);
 
-        FunctionsExtended.structOLS2(bw);
-        FunctionsExtended.createOLS2(bw);
-        FunctionsExtended.printOLS(fieldAmount, bw, requiredNames);
-        FunctionsExtended.structOLS1(bw);
+            FunctionsExtended.structOLS2(bw);
+            FunctionsExtended.createOLS2(bw);
+            FunctionsExtended.printOLS(bw, requiredNames);
+            FunctionsExtended.structOLS1(bw);
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
 
         //todo: put functions here, without 9+10
     }
@@ -180,11 +187,86 @@ public class SampleController {
 
     @FXML
     public void initialize(){
-            init_choiceBoxes();
+        try {
+            init_storage();
+        } catch(IOException e){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("ОП, ОШИБКА");
+            alert.setHeaderText(null);
+            alert.setContentText("Ошибка чтения. Перезапустите программу.!");
+            alert.showAndWait();
+        }
+        init_choiceBoxes();
     }
 
 
 
     public void something() {
+    }
+
+    void init_storage() throws IOException{
+        FileInputStream fstream = null;
+        try {
+            fstream = new FileInputStream("LineStorage");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
+
+        int i;
+
+
+                for (i=0;i<3;i++) {
+                    Functions.STRINGS_NAMESPACESTD[i] = br.readLine();
+                }
+                for (i=0;i<4;i++){
+                    Functions.STRINGS_FILLSTRUCT[i] = br.readLine();
+                }
+                for (i=0;i<4;i++){
+                    Functions.STRING_OUTPUTEVERYTHING[i] = br.readLine();
+                }
+                for (i=0;i<2;i++){
+                    Functions.STRINGS_OUTPUTONE[i] = br.readLine();
+                }
+                for (i=0;i<8;i++){
+                    Functions.STRINGS_INPUTALL[i]= br.readLine();
+                }
+                for (i=0;i<5;i++){
+                    Functions.STRINGS_MAKEARECORD[i] = br.readLine();
+                }
+                for (i=0;i<9;i++){
+                    Functions.STRINGS_HELLO[i] = br.readLine();
+                }
+                for (i=0;i<6;i++){
+                    Functions.STRINGS_MAIN[i] = br.readLine();
+                }
+
+
+
+                for (i=0;i<5;i++){
+                    FunctionsExtended.STRINGSEXT_STRUCTOLS2[i] = br.readLine();
+                }
+                for (i=0;i<31;i++){
+                    FunctionsExtended.STRINGSEXT_CREATEOLS2[i] = br.readLine();
+                }
+                for (i=0;i<9;i++){
+                    FunctionsExtended.STRINGSEXT_PRINTOLS[i] = br.readLine();
+                }
+                for (i=0;i<4;i++){
+                    FunctionsExtended.STRINGSEXT_STRUCTOLS1[i] = br.readLine();
+                }
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }

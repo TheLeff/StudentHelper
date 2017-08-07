@@ -1,26 +1,16 @@
 #include "stdafx.h"
 #include "iostream.h"
-
+using namespace std;
 struct Table
 {
-
-
 } db[500];
-
-using namespace std;
-
 int countRecords = 0;
-
 void output() {
 for (int i = 0; i < countRecords; i++) {
 output(i);
 }
-
 void output(int i){
-
 }
-}
-
 void input() {
 FILE *file = fopen("table.dat", "r");
 for (int i = 0; i < 500; i++) {
@@ -29,26 +19,18 @@ countRecords++
 }
 fclose(file);
 }
-
 void saveRecord() {
 FILE *f = fopen("table.dat", "a");
-
 countRecords++;
 fclose(f);
 }
-
 void hello() {
 cout << =====================
 ====Choose action====
-1. Add info
-2.Output everything
-something else
 cin >> option;
 cin.ignore();
 switch(option) {
-case 1:
- something();
-break;}
+}
 hello();
 }
 int main(){
@@ -62,11 +44,9 @@ Table element;
 OLS *next;
 OLS *last
 };
-
 void createOLS() {
 OLS *element, *current, *pred;
 *FILE A = fopen"table.dat", "rb");
-
 first = NULL;
 while(fread(&listh, sizeof(listh), 1, A)) {
 element = new (OLS);
@@ -86,7 +66,6 @@ if (current == first)
 element->next = first;
 first = element;
 }
-
 else
 {
 element->next = pred->next;
@@ -96,17 +75,15 @@ pred->next = element;
 }
 fclose(A);
 }
-
 void printOLS(OLS *current) {
 OLS *tek;
 tek = current;
 while (tek != NULL)
 {
-cout << endl << tek->asd " "<< tek->zxc " "<< tek->awt " "<< tek->gasg " "<< tek->asxzx " "<< tek->gasg " ";
+cout << endl
 tek=tek->next;
 }
 }
-
 struct OLS {
 Table element;
 OLS *next;

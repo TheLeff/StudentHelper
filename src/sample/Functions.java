@@ -7,60 +7,46 @@ import java.util.ArrayList;
 class Functions {
 
 
-    static void namespaceSTD(BufferedWriter bw){
-        try {
-            bw.write("\r\n" + "using namespace std;" + "\r\n" + "\r\n"
-            +"int countRecords = 0; " + "\r\n" + "\r\n");
-        } catch (IOException e) {
-            e.printStackTrace();
+
+
+    static String[] STRINGS_NAMESPACESTD = new String[3];
+    static String[] STRINGS_FILLSTRUCT = new String[4];
+    static String[] STRING_OUTPUTEVERYTHING = new String[4];
+    static String[] STRINGS_OUTPUTONE = new String[2];
+    static String[] STRINGS_INPUTALL = new String[8];
+    static String[] STRINGS_MAKEARECORD = new String[5];
+    static String[] STRINGS_HELLO = new String[9];
+    static String[] STRINGS_MAIN = new String[6];
+
+
+
+
+    static void namespaceSTD(BufferedWriter bw) throws IOException {
+        for (String LINE : STRINGS_NAMESPACESTD){
+            bw.write(LINE);
         }
     }
-    static void outputEverything(BufferedWriter bw) {
-
-        try {
-            bw.write("void output() {" + "\r\n" +
-                    "for (int i = 0; i < countRecords; i++) {" + "\r\n" +
-                    "output(i);" + "\r\n" +
-                    '}' + "\r\n" + "\r\n");
-        } catch (IOException e) {
-            e.printStackTrace();
+    static void outputEverything(BufferedWriter bw) throws IOException {
+        for (String LINE : STRINGS_FILLSTRUCT){
+            bw.write(LINE);
         }
     }
-    static void outputOne(int fieldAmount, BufferedWriter bw){
+    static void outputOne(int fieldAmount, BufferedWriter bw) throws IOException {
 
 
-        try {
-            bw.write("void output(int i){" + "\r\n" +
-                    "cout");
-            for (int i = 0; i < fieldAmount; i++) {
-                bw.write(" << " + " db[i]." + SampleController.requiredNames.get(i) + " << " + "endl");
-            }
-            bw.write("\r\n" + "}" + "\r\n");
-        }
-        catch(IOException e)
-        {
-            e.printStackTrace();
-        }
-    }
-    static void inputAll(BufferedWriter bw) {
+        //todo: custom
 
-        try { // todo: change for to while to make it work without one more bool field
-            bw.write("\r\n" + "void input() {" + "\r\n" + "FILE *file = fopen(" + '"' + "table.dat" + '"' + ", " + '"' + 'r' + '"' + ");" + "\r\n" +
-                    "for (int i = 0; i < 500; i++) { " + "\r\n" +
-                    " fread(&db[i], sizeof db[i], 1, file);" + "\r\n" +
-                    "countRecords++" + "\r\n" +
-                    '}' + "\r\n" + "fclose(file);" + "\r\n" + '}' + "\r\n");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+                bw.write(" << " + " db[i]." + SampleController.requiredNames.get(0) + " << " + "endl");
 
     }
-    static void makeARecord(int fieldAmount, BufferedWriter bw, ArrayList requiredNames){
+    static void inputAll(BufferedWriter bw) throws IOException  {
+        for (String LINE : STRINGS_INPUTALL){
+            bw.write(LINE);
+        }
+    }
+    static void makeARecord(int fieldAmount, BufferedWriter bw, ArrayList requiredNames) throws IOException {
 
-        try { // todo: fix bad input (ints and chars)
-            bw.write("\r\n" + "void saveRecord() {" + "\r\n" +
-            "FILE *f = fopen(" + '"' + "table.dat" + '"' + ", " + '"' + 'a' + '"' + ");" + "\r\n");
-
+      //todo: custom
 
             bw.write("cout ");
             for (int i = 0; i<fieldAmount; i++){
@@ -69,40 +55,20 @@ class Functions {
 
             }
 
-            bw.write("countRecords++;" + "\r\n" + "fclose(f);" + "\r\n" + '}' + "\r\n");
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
 
 
     }
+    static void hello(int fieldAmount, BufferedWriter bw, ArrayList requiredNames) throws IOException {
 
-    static void hello(int fieldAmount, BufferedWriter bw, ArrayList requiredNames){
-        try {
-            bw.write("\r\n" + "void hello() {" + "\r\n" + "cout << =====================\r\n====Choose action====\r\n1. Add info\r\n2.Output everything\r\n"
-            + "something else\r\n");
-            bw.write("cin >> option;\r\ncin.ignore();\r\nswitch(option) {\r\ncase 1:\r\n something();\r\nbreak;");
-            bw.write("}\r\nhello();\r\n}");
-        } catch (IOException e) {
-            e.printStackTrace();
+        //todo: custom
+    }
+    static void writeMain(BufferedWriter bw) throws IOException {
+        for (String LINE : STRINGS_MAIN){
+            bw.write(LINE);
         }
     }
-    static void writeMain(BufferedWriter bw){
-
-        try {
-            bw.write("\r\nint main(){" +
-            "\r\nsystem(" + '"' + "Cls" + '"' + ");" +
-            "\r\nSetConsoleCP(1251);\r\nSetConsoleOutputCP(1251);" +
-                    "\r\nhello();\r\n}");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-    static void writeSearch(int fieldAmount, BufferedWriter bw, ArrayList requiredNames){
+    static void writeSearch(int fieldAmount, BufferedWriter bw, ArrayList requiredNames) throws IOException {
 
     }
     // todo: search
