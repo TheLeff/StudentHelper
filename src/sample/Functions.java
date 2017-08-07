@@ -1,13 +1,10 @@
-package MainFolder.MethodPackage;
+package sample;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
 class Functions {
-
-
-
 
     static String[] STRINGS_NAMESPACESTD = new String[3];
     static String[] STRINGS_FILLSTRUCT = new String[4];
@@ -36,7 +33,7 @@ class Functions {
 
         //todo: custom
 
-                bw.write(" << " + " db[i]." + SampleController.requiredNames.get(0) + " << " + "endl");
+        bw.write(" << " + " db[i]." + FXMLController.requiredNames.get(0) + " << " + "endl");
 
     }
     static void inputAll(BufferedWriter bw) throws IOException  {
@@ -46,14 +43,14 @@ class Functions {
     }
     static void makeARecord(int fieldAmount, BufferedWriter bw, ArrayList requiredNames) throws IOException {
 
-      //todo: custom
+        //todo: custom
 
-            bw.write("cout ");
-            for (int i = 0; i<fieldAmount; i++){
-                bw.write(" << Type in the " + requiredNames.get(i) + " << endl;" + "\r\n" +
-                        "fgets(db[countRecords]." + requiredNames.get(i) + ", 30, stdin);" + "\r\n");
+        bw.write("cout ");
+        for (int i = 0; i < fieldAmount; i++) {
+            bw.write(" << Type in the " + requiredNames.get(i) + " << endl;" + "\r\n" +
+                    "fgets(db[countRecords]." + requiredNames.get(i) + ", 30, stdin);" + "\r\n");
 
-            }
+        }
 
 
 
