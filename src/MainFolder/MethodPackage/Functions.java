@@ -1,4 +1,4 @@
-package sample;
+package MainFolder.MethodPackage;
 
 import java.io.BufferedWriter;
 import java.io.IOException;

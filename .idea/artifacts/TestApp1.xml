@@ -17,7 +17,7 @@
     </properties>
     <root id="root">
       <element id="archive" name="TestApp1.jar">
-        <element id="module-output" name="TestApp1" />
+        <element id="module-output" name="StudentHelper" />
       </element>
     </root>
   </artifact>

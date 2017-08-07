@@ -1,5 +1,7 @@
-package sample;
+package MainFolder.MethodPackage;
 
+import MainFolder.ExceptionPackage.FillContentsException;
+import MainFolder.ExceptionPackage.ReadIssueException;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
@@ -187,16 +189,37 @@ public class SampleController {
 
     @FXML
     public void initialize(){
+
+        Thread tr1 = new Thread(() -> {
+            try {
+                init_storage();
+            } catch (FillContentsException e) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("ОП, ОШИБКА");
+                alert.setHeaderText(null);
+                alert.setContentText("Ошибка памяти. Перезапустите программу!");
+                alert.showAndWait();
+            } catch (ReadIssueException e) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("ОП, ОШИБКА");
+                alert.setHeaderText(null);
+                alert.setContentText("Ошибка чтения. Перезапустите программу!");
+                alert.showAndWait();
+            }
+
+        });
+        Thread tr2 = new Thread(this::init_choiceBoxes);
+        tr1.start();
+        tr2.start();
         try {
-            init_storage();
-        } catch(IOException e){
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("ОП, ОШИБКА");
-            alert.setHeaderText(null);
-            alert.setContentText("Ошибка чтения. Перезапустите программу.!");
-            alert.showAndWait();
+            tr1.join();
+            tr2.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            //todo: error, kill thread
         }
-        init_choiceBoxes();
+
+
     }
 
 
@@ -204,68 +227,60 @@ public class SampleController {
     public void something() {
     }
 
-    void init_storage() throws IOException{
-        FileInputStream fstream = null;
+    private void init_storage() throws ReadIssueException, FillContentsException {
+        FileInputStream fstream;
         try {
             fstream = new FileInputStream("LineStorage");
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            throw new ReadIssueException(e.toString());
         }
+
         BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
 
         int i;
+        try {
+            for (i = 0; i < 3; i++) {
+                Functions.STRINGS_NAMESPACESTD[i] = br.readLine();
+            }
+            for (i = 0; i < 4; i++) {
+                Functions.STRINGS_FILLSTRUCT[i] = br.readLine();
+            }
+            for (i = 0; i < 4; i++) {
+                Functions.STRING_OUTPUTEVERYTHING[i] = br.readLine();
+            }
+            for (i = 0; i < 2; i++) {
+                Functions.STRINGS_OUTPUTONE[i] = br.readLine();
+            }
+            for (i = 0; i < 8; i++) {
+                Functions.STRINGS_INPUTALL[i] = br.readLine();
+            }
+            for (i = 0; i < 5; i++) {
+                Functions.STRINGS_MAKEARECORD[i] = br.readLine();
+            }
+            for (i = 0; i < 9; i++) {
+                Functions.STRINGS_HELLO[i] = br.readLine();
+            }
+            for (i = 0; i < 6; i++) {
+                Functions.STRINGS_MAIN[i] = br.readLine();
+            }
 
 
-                for (i=0;i<3;i++) {
-                    Functions.STRINGS_NAMESPACESTD[i] = br.readLine();
-                }
-                for (i=0;i<4;i++){
-                    Functions.STRINGS_FILLSTRUCT[i] = br.readLine();
-                }
-                for (i=0;i<4;i++){
-                    Functions.STRING_OUTPUTEVERYTHING[i] = br.readLine();
-                }
-                for (i=0;i<2;i++){
-                    Functions.STRINGS_OUTPUTONE[i] = br.readLine();
-                }
-                for (i=0;i<8;i++){
-                    Functions.STRINGS_INPUTALL[i]= br.readLine();
-                }
-                for (i=0;i<5;i++){
-                    Functions.STRINGS_MAKEARECORD[i] = br.readLine();
-                }
-                for (i=0;i<9;i++){
-                    Functions.STRINGS_HELLO[i] = br.readLine();
-                }
-                for (i=0;i<6;i++){
-                    Functions.STRINGS_MAIN[i] = br.readLine();
-                }
+            for (i = 0; i < 5; i++) {
+                FunctionsExtended.STRINGSEXT_STRUCTOLS2[i] = br.readLine();
+            }
+            for (i = 0; i < 31; i++) {
+                FunctionsExtended.STRINGSEXT_CREATEOLS2[i] = br.readLine();
+            }
+            for (i = 0; i < 9; i++) {
+                FunctionsExtended.STRINGSEXT_PRINTOLS[i] = br.readLine();
+            }
+            for (i = 0; i < 4; i++) {
+                FunctionsExtended.STRINGSEXT_STRUCTOLS1[i] = br.readLine();
+            }
+        } catch (IOException e) {
 
-
-
-                for (i=0;i<5;i++){
-                    FunctionsExtended.STRINGSEXT_STRUCTOLS2[i] = br.readLine();
-                }
-                for (i=0;i<31;i++){
-                    FunctionsExtended.STRINGSEXT_CREATEOLS2[i] = br.readLine();
-                }
-                for (i=0;i<9;i++){
-                    FunctionsExtended.STRINGSEXT_PRINTOLS[i] = br.readLine();
-                }
-                for (i=0;i<4;i++){
-                    FunctionsExtended.STRINGSEXT_STRUCTOLS1[i] = br.readLine();
-                }
-
-
-
-
-
-
-
-
-
-
-
+            throw new FillContentsException(e.toString());
+        }
 
 
     }
