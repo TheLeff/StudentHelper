@@ -7,42 +7,42 @@ import java.util.ArrayList;
 class Functions {
 
     static String[] STRINGS_NAMESPACESTD = new String[3];
-    static String[] STRINGS_FILLSTRUCT = new String[4];
-    static String[] STRING_OUTPUTEVERYTHING = new String[4];
+    static String[] STRING_OUTPUTEVERYTHING = new String[5];
     static String[] STRINGS_OUTPUTONE = new String[2];
     static String[] STRINGS_INPUTALL = new String[8];
     static String[] STRINGS_MAKEARECORD = new String[5];
     static String[] STRINGS_HELLO = new String[9];
     static String[] STRINGS_MAIN = new String[6];
-    static int i = 0;
+    private static int i = 0;
 
 
-    static String separator = System.lineSeparator();
+    private static String separator = System.lineSeparator();
 
 
     static void namespaceSTD(BufferedWriter bw) throws IOException {
         for (i = 0; i < 2; i++) {
-            bw.write(separator + STRINGS_NAMESPACESTD[i]);
+            bw.write(STRINGS_NAMESPACESTD[i] + separator);
         }
     }
     static void outputEverything(BufferedWriter bw) throws IOException {
-        for (i = 0; i < 3; i++) {
-            bw.write(separator + STRINGS_FILLSTRUCT[i]);
+        for (i = 0; i < 5; i++) {
+            bw.write(separator + STRING_OUTPUTEVERYTHING[i]);
         }
     }
     static void outputOne(int fieldAmount, BufferedWriter bw) throws IOException {
-
-
-        //todo: custom
-
-        //bw.write(" << " + " db[i]." + FXMLController.requiredNames.get(0) + " << " + "endl");
-
+        bw.write(separator + separator + "void output(i){ " + "\r\n" + "cout");
+        for (int i = 0; i < fieldAmount; i++) {
+            bw.write(" << " + "db[i]." + FXMLController.requiredNames.get(i) + " << " + '"' + ' ' + '"');
+        }
+        bw.write(" << endl;" + separator + '}');
     }
+
     static void inputAll(BufferedWriter bw) throws IOException  {
         for (i = 0; i < 7; i++) {
             bw.write(separator + STRINGS_INPUTALL[i]);
         }
     }
+
     static void makeARecord(int fieldAmount, BufferedWriter bw, ArrayList requiredNames) throws IOException {
 
         //todo: custom
