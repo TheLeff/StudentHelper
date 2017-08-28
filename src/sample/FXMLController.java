@@ -5,11 +5,12 @@ import javafx.scene.control.*;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class FXMLController {
 
 
-    static ArrayList<String> requiredNames = new ArrayList<>();
+    static ArrayList<VariablePair> requiredNames = new ArrayList<>();
     public Button button_task7;
     public Button button_task9;
     public Button button_task10;
@@ -59,6 +60,31 @@ public class FXMLController {
         //todo: put functions here, without 9+10
     }
 
+    void organizePair(String Text, String Variable) { // I really need it to make a Functions.makeARecord() function
+        switch (Variable) {
+            case "int":
+                requiredNames.add(new VariablePair(0, Text));
+                break;
+            case "char":
+                requiredNames.add(new VariablePair(1, Text));
+                break;
+            case "char[2]":
+                requiredNames.add(new VariablePair(2, Text));
+                break;
+            case "char[5]":
+                requiredNames.add(new VariablePair(3, Text));
+                break;
+            case "char[10]":
+                requiredNames.add(new VariablePair(4, Text));
+                break;
+            case "char[20]":
+                requiredNames.add(new VariablePair(5, Text));
+                break;
+            case "char[30]":
+                requiredNames.add(new VariablePair(6, Text));
+                break;
+        }
+    }
     private int fillStruct(BufferedWriter bw) {
         try {
             bw.write("\r\n" + "struct Table" + "\r\n" + '{' + "\r\n");
@@ -68,37 +94,38 @@ public class FXMLController {
         if (someField_1.getText().length() > 1 && choice_1.getValue() != null) {
             fieldAmount++;
             fillSlot(bw, someField_1, choice_1);
-            requiredNames.add(someField_1.getText());
+            organizePair(someField_1.getText(), choice_1.getValue().toString());
+
         }
         if (someField_2.getText().length() > 1 && choice_2.getValue() != null) {
             fieldAmount++;
             fillSlot(bw, someField_2, choice_2);
-            requiredNames.add(someField_2.getText());
+            organizePair(someField_2.getText(), choice_2.getValue().toString());
         }
         if (someField_3.getText().length() > 1 && choice_3.getValue() != null) {
             fieldAmount++;
             fillSlot(bw, someField_3, choice_3);
-            requiredNames.add(someField_3.getText());
+            organizePair(someField_3.getText(), choice_3.getValue().toString());
         }
         if (someField_4.getText().length() > 1 && choice_4.getValue() != null) {
             fieldAmount++;
             fillSlot(bw, someField_4, choice_4);
-            requiredNames.add(someField_4.getText());
+            organizePair(someField_4.getText(), choice_4.getValue().toString());
         }
         if (someField_5.getText().length() > 1 && choice_5.getValue() != null) {
             fieldAmount++;
             fillSlot(bw, someField_5, choice_5);
-            requiredNames.add(someField_5.getText());
+            organizePair(someField_5.getText(), choice_5.getValue().toString());
         }
         if (someField_6.getText().length() > 1 && choice_6.getValue() != null) {
             fieldAmount++;
             fillSlot(bw, someField_6, choice_6);
-            requiredNames.add(someField_6.getText());
+            organizePair(someField_6.getText(), choice_6.getValue().toString());
         }
         if (someField_7.getText().length() > 1 && choice_7.getValue() != null) {
             fieldAmount++;
             fillSlot(bw, someField_7, choice_7);
-            requiredNames.add(someField_7.getText());
+            organizePair(someField_7.getText(), choice_7.getValue().toString());
         }
 
         try {
@@ -114,24 +141,16 @@ public class FXMLController {
         int fieldAmount = 0;
 
 
-        File file = new File(System.getProperty("java.io.tmpdir"), "something.txt"); //todo: fix this garbage
+        File file = new File(System.getProperty("java.io.tmpdir"), "something.txt");
 
-        //File file = null;
-        //File desktop = null;
-//        try {
-//
-//            file = File.createTempFile("tempfile", ".txt");
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-        //file = new File(desktop, "something.txt");
         try {
             if (!file.exists()) {
                 if (!file.createNewFile()) {
                     writeFile();
                     return;
-                }
+                } else System.out.println("File creation problem"); // linux ubuntu 16.04.8 - triggered
             }
+
             FileWriter fw = new FileWriter(file);
             BufferedWriter bw = new BufferedWriter(fw);
             Functions.namespaceSTD(bw);
@@ -152,7 +171,9 @@ public class FXMLController {
             if (rs == ButtonType.OK) {
                 try {
                     String path = System.getProperty("java.io.tmpdir") + "\\" + "something.txt";
-                    ProcessBuilder pb = new ProcessBuilder("Notepad.exe", path);
+                    ProcessBuilder pb = new ProcessBuilder("notepad.exe", path);
+                    if (Objects.equals(System.lineSeparator(), "\n"))
+                        pb = new ProcessBuilder("gedit", path); // linux gedit compatibility, System.java:637 for reference
                     pb.start();
 
                 } catch (java.io.IOException e) {
@@ -163,7 +184,6 @@ public class FXMLController {
         });
         file.deleteOnExit();
     }
-
 
     private void init_choiceBoxes() {
 
@@ -177,8 +197,8 @@ public class FXMLController {
         choice_6.getItems().addAll(ParamArray);
         choice_7.getItems().addAll(ParamArray);
 
-    }
 
+    }
 
     @FXML
     public void initialize() {
@@ -189,14 +209,10 @@ public class FXMLController {
 
     }
 
-
     public void something() {
     }
 
-    private void init_storage()
-
-    {
-
+    private void init_storage() {
 
         FileInputStream fstream = null;
         try {
@@ -205,7 +221,6 @@ public class FXMLController {
             e.printStackTrace();
         }
         BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
-
 
         int i;
         try {
@@ -229,7 +244,7 @@ public class FXMLController {
             }
             for (i = 0; i < 5; i++) {
                 Functions.STRINGS_MAIN[i] = br.readLine();
-            }
+            } // fine
 
 
             for (i = 0; i < 4; i++) {
@@ -243,13 +258,10 @@ public class FXMLController {
             }
             for (i = 0; i < 3; i++) {
                 FunctionsExtended.STRINGSEXT_STRUCTOLS1[i] = br.readLine();
-            }
+            } // not fine, can't fix, gedit doesn't open
+
         } catch (IOException e) {
-
             e.printStackTrace();
-            //throw new FillContentsException(e.toString());
         }
-
-
     }
 }

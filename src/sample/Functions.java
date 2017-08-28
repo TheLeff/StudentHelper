@@ -13,6 +13,7 @@ class Functions {
     static String[] STRINGS_MAKEARECORD = new String[5];
     static String[] STRINGS_HELLO = new String[9];
     static String[] STRINGS_MAIN = new String[6];
+
     private static int i = 0;
 
 
@@ -43,9 +44,48 @@ class Functions {
         }
     }
 
-    static void makeARecord(int fieldAmount, BufferedWriter bw, ArrayList requiredNames) throws IOException {
+    static void makeARecord(BufferedWriter bw, ArrayList<VariablePair> requiredNames) throws IOException {
 
         //todo: custom
+
+        /*
+        cout << "Режим ввода";
+        cout << "Vvedite " + shto-to;
+
+         */
+
+        bw.write("void record() { " + separator + "cout <<" + '"' + "Rejim vvoda" + '"' + " << endl;" + separator);
+        for (i = 0; i < requiredNames.size(); i++) {
+            bw.write("cout << " + '"' + "Vvedite " + requiredNames.get(i).getName() + '"' + " << endl;" + separator);
+            switch (requiredNames.get(i).getCode()) {
+                case 1:
+                    bw.write("cin >> db[countRecords]." + requiredNames.get(i).getName() + "<< endl;");
+                    break;
+                case 2:
+                    bw.write("fgets(db[countRecords]." + requiredNames.get(i).getName() + ", 1, stdin);");
+                    break;
+                case 3:
+                    bw.write("fgets(db[countRecords]." + requiredNames.get(i).getName() + ", 2, stdin);");
+                    break;
+                case 4:
+                    bw.write("fgets(db[countRecords]." + requiredNames.get(i).getName() + ", 5, stdin);");
+                    break;
+                case 5:
+                    bw.write("fgets(db[countRecords]." + requiredNames.get(i).getName() + ", 10, stdin);");
+                    break;
+                case 6:
+                    bw.write("fgets(db[countRecords]." + requiredNames.get(i).getName() + ", 20, stdin);");
+                    break;
+                case 7:
+                    bw.write("fgets(db[countRecords]." + requiredNames.get(i).getName() + ", 30, stdin);");
+                    break;
+
+            }
+
+            // apparently I forgot to bring code with myself ROFL so...
+            //todo: to do output
+        }
+
 
 //        bw.write("cout ");
 //        for (int i = 0; i < fieldAmount; i++) {
@@ -59,6 +99,7 @@ class Functions {
 
     }
     static void hello(int fieldAmount, BufferedWriter bw, ArrayList requiredNames) throws IOException {
+
 
         //todo: custom
     }
