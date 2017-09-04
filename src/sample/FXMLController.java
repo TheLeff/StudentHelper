@@ -44,10 +44,10 @@ public class FXMLController {
         try {
             Functions.outputEverything(bw);
             Functions.outputOne(fieldAmount, bw);
-//            Functions.inputAll(bw);
-//            Functions.makeARecord(fieldAmount, bw, requiredNames);
-//            Functions.hello(fieldAmount, bw, requiredNames);
-//            Functions.writeMain(bw);
+            Functions.inputAll(bw);
+            Functions.makeARecord(bw, requiredNames);
+            Functions.hello(bw);
+            Functions.writeMain(bw);
 //
 //            FunctionsExtended.structOLS2(bw);
 //            FunctionsExtended.createOLS2(bw);
