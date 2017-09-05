@@ -47,14 +47,6 @@ class Functions {
 
     static void makeARecord(BufferedWriter bw, ArrayList<VariablePair> requiredNames) throws IOException {
 
-        //todo: custom
-
-        /*
-        cout << "Режим ввода";
-        cout << "Vvedite " + shto-to;
-
-         */
-
         bw.write(separator + separator + "void record() { " + separator + "cout <<" + '"' + "Rejim vvoda" + '"' + " << endl;" + separator);
         for (i = 0; i < requiredNames.size(); i++) {
             bw.write("cout << " + '"' + "Vvedite " + requiredNames.get(i).getName() + '"' + " << endl;" + separator);
@@ -81,13 +73,8 @@ class Functions {
                 case 6:
                     bw.write("fgets(db[countRecords]." + requiredNames.get(i).getName() + ", 30, stdin);" + separator);
                     break;
-
             }
-
-            // apparently I forgot to bring code with myself ROFL so...
-            //todo: to do output
         }
-
         bw.write(separator + '}' + separator);
 
 
@@ -154,14 +141,6 @@ class Functions {
                 "SetConsoleCP(1251);" + separator +
                 "SetConsoleOutputCP(1251);" + separator +
                 "hello();" + separator + '}' + separator);
-//        int main() {
-//            input();
-//            createOLS();
-//            system("Cls");
-//            SetConsoleCP(1251);
-//            SetConsoleOutputCP(1251);
-//            hello();
-//        }
     }
     static void writeSearch(int fieldAmount, BufferedWriter bw, ArrayList requiredNames) throws IOException {
 
