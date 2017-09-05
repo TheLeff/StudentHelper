@@ -9,7 +9,6 @@ import java.util.Objects;
 
 public class FXMLController {
 
-
     static ArrayList<VariablePair> requiredNames = new ArrayList<>();
     public Button button_task7;
     public Button button_task9;
@@ -56,8 +55,6 @@ public class FXMLController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        //todo: put functions here, without 9+10
     }
 
     void organizePair(String Text, String Variable) { // I really need it to make a Functions.makeARecord() function
@@ -140,7 +137,6 @@ public class FXMLController {
     void writeFile() {
         int fieldAmount = 0;
 
-
         File file = new File(System.getProperty("java.io.tmpdir"), "something.txt");
 
         try {
@@ -148,7 +144,8 @@ public class FXMLController {
                 if (!file.createNewFile()) {
                     writeFile();
                     return;
-                } else System.out.println("File creation problem"); // linux ubuntu 16.04.8 - triggered
+                } else
+                    System.out.println("File creation problem"); // linux ubuntu 16.04.8 - triggered and FOR SOME REASON ON WINDOWS 10 TOO
             }
 
             FileWriter fw = new FileWriter(file);
