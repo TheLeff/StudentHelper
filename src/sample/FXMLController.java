@@ -10,9 +10,6 @@ import java.util.Objects;
 public class FXMLController {
 
     static ArrayList<VariablePair> requiredNames = new ArrayList<>();
-    public Button button_task7;
-    public Button button_task9;
-    public Button button_task10;
     public Button button_compile;
     public TextField someField_1;
     public TextField someField_2;
@@ -40,24 +37,24 @@ public class FXMLController {
 
     private void writeFunctions(int fieldAmount, BufferedWriter bw) {
 
-        try {
-            Functions.outputEverything(bw);
-            Functions.outputOne(fieldAmount, bw);
-            Functions.inputAll(bw);
-            Functions.makeARecord(bw, requiredNames);
-            Functions.hello(bw);
-            Functions.writeMain(bw);
+//        try {
+//            Functions.outputEverything(bw);
+//            Functions.outputOne(fieldAmount, bw);
+//            Functions.inputAll(bw);
+//            Functions.makeARecord(bw, requiredNames);
+//            Functions.hello(bw);
+//            Functions.writeMain(bw);
 //
 //            FunctionsExtended.structOLS2(bw);
 //            FunctionsExtended.createOLS2(bw);
 //            FunctionsExtended.printOLS(bw, requiredNames);
 //            FunctionsExtended.structOLS1(bw);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 
-    void organizePair(String Text, String Variable) { // I really need it to make a Functions.makeARecord() function
+    void organizePair(String Text, String Variable) throws Exception { // I really need it to make a Functions.makeARecord() function
         switch (Variable) {
             case "int":
                 requiredNames.add(new VariablePair(0, Text));
@@ -82,7 +79,8 @@ public class FXMLController {
                 break;
         }
     }
-    private int fillStruct(BufferedWriter bw) {
+
+    private int fillStruct(BufferedWriter bw) throws Exception {
         try {
             bw.write("\r\n" + "struct Table" + "\r\n" + '{' + "\r\n");
         } catch (java.io.IOException e) {
@@ -134,7 +132,28 @@ public class FXMLController {
     }
 
     @FXML
-    void writeFile() {
+    void helpMethod() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Информация о программе");
+        alert.setHeaderText("Руководство пользователя");
+        alert.setContentText("Данная программа позволит Вам сгенерировать лабораторную работу по программированию.\r\n" +
+                "На данный момент реализован функционал 7 задачи (без поиска).\r\n" +
+                "Введите необходимые поля, нажмите \"Создать\" и вставьте полученный код в Visual Studio.\r\n" +
+                "Также не забудьте создать в папке проекта файл \"table.dat\" для хранения информации.\r\n" +
+                "Версия: 1.1.0\r\n" +
+                "https://leff.su/");
+
+        alert.showAndWait().ifPresent(rs -> {
+            if (rs == ButtonType.OK) {
+
+                System.out.println("Pressed Compile.");
+            }
+        });
+
+    }
+
+    @FXML
+    void writeFile() throws Exception {
         int fieldAmount = 0;
 
         File file = new File(System.getProperty("java.io.tmpdir"), "something.txt");
@@ -144,10 +163,8 @@ public class FXMLController {
                 if (!file.createNewFile()) {
                     writeFile();
                     return;
-                } else
-                    System.out.println("File creation problem"); // linux ubuntu 16.04.8 - triggered and FOR SOME REASON ON WINDOWS 10 TOO
+                }
             }
-
             FileWriter fw = new FileWriter(file);
             BufferedWriter bw = new BufferedWriter(fw);
             Functions.namespaceSTD(bw);
@@ -186,24 +203,19 @@ public class FXMLController {
 
         final String[] ParamArray = new String[]{"int", "char", "char[2]", "char[5]", "char[10]", "char[20]", "char[30]"};
 
-        choice_1.getItems().addAll(ParamArray);
-        choice_2.getItems().addAll(ParamArray);
-        choice_3.getItems().addAll(ParamArray);
-        choice_4.getItems().addAll(ParamArray);
-        choice_5.getItems().addAll(ParamArray);
-        choice_6.getItems().addAll(ParamArray);
-        choice_7.getItems().addAll(ParamArray);
-
-
+        choice_1.getItems().addAll((Object[]) ParamArray);
+        choice_2.getItems().addAll((Object[]) ParamArray);
+        choice_3.getItems().addAll((Object[]) ParamArray);
+        choice_4.getItems().addAll((Object[]) ParamArray);
+        choice_5.getItems().addAll((Object[]) ParamArray);
+        choice_6.getItems().addAll((Object[]) ParamArray);
+        choice_7.getItems().addAll((Object[]) ParamArray);
     }
 
     @FXML
     public void initialize() {
-
         init_storage();
         init_choiceBoxes();
-
-
     }
 
     public void something() {
@@ -241,7 +253,7 @@ public class FXMLController {
             }
             for (i = 0; i < 5; i++) {
                 Functions.STRINGS_MAIN[i] = br.readLine();
-            } // fine
+            }
 
 
             for (i = 0; i < 4; i++) {
@@ -255,7 +267,7 @@ public class FXMLController {
             }
             for (i = 0; i < 3; i++) {
                 FunctionsExtended.STRINGSEXT_STRUCTOLS1[i] = br.readLine();
-            } // not fine, can't fix, gedit doesn't open
+            }
 
         } catch (IOException e) {
             e.printStackTrace();

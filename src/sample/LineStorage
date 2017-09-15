@@ -1,8 +1,8 @@
 #include "stdafx.h"
-#include "iostream.h"
+#include "iostream"
 using namespace std;
 int countRecords = 0;
-void output() {
+void outputS() {
 for (int i = 0; i < countRecords; i++) {
 output(i);
 }
@@ -12,7 +12,7 @@ void input() {
 FILE *file = fopen("table.dat", "r");
 for (int i = 0; i < 500; i++) {
  fread(&db[i], sizeof db[i], 1, file);
-countRecords++
+countRecords++;
 }
 fclose(file);
 }
@@ -24,8 +24,8 @@ fclose(f);
 void hello() {
 cout << =====================
 ====Choose action====
-cin >> option;
 cin.ignore();
+cin >> option;
 switch(option) {
 }
 hello();
