@@ -10,6 +10,4 @@ Java + JavaFX via IntelliJ IDEA
 
 It's the app to help the students of ISPU with programming course.
 
-To get help - press "Помощь".
-
 .exe compiled via Launch4j. If you're afraid to open it because you think there might be a virus, then download the whole project, set it up, etc. There is no viruses/malware. It's open source, you can check it yourself.
