@@ -1,18 +1,24 @@
 # StudentHelper
-Java+JavaFX
 
-It's the app I intended to make to help new students of my university with their assignments.
+#Русский
+Приложение-помощник для студентов ИГЭУ по методичке Алыковой.
 
-At first, I wanted to make it cost 25$, but then I decided I'd rather put it out for free to get attention.
+Чтобы получить помощь, нажмите "Помощь".
 
-I still question some of my design and I am more likely to change plenty of stuff that's already written.
+.exe файл создан с помощью программы Launc4j. Если вы боитесь открывать, думая, что там вирус, скачивайте целый проект, настраивайте его и так далее. Код в открытом доступе, вирусов нет.
 
-Screenshots from 22-Jul-17:
+#English
 
-https://i.imgur.com/prW7PnK.png
+It's the app to help the students of ISPU with programming course.
 
-https://i.imgur.com/U9WN3si.png
+To get help - press "Помощь".
 
-https://i.imgur.com/YmtL91D.png
+.exe compiled via Launch4j. If you're afraid to open it because you think there might be a virus, then download the whole project, set it up, etc. There is no viruses/malware. It's open source, you can check it yourself.
 
-https://i.imgur.com/D71nzAF.png
+#Скриншоты - Screenshots
+
+TBA / Скоро будут добавлены
+
+#Средства, Фрэймворки - Tools, Frameworks
+
+IDE: IntelliJ Idea, Java + JavaFX

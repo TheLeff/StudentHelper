@@ -3,7 +3,10 @@ package sample;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -29,32 +32,45 @@ public class FXMLController {
 
     private void fillSlot(BufferedWriter bw, TextField someField, ChoiceBox<Object> choiceBox) {
         try {
-            bw.write(choiceBox.getValue() + " " + someField.getText() + ';' + "\r\n");
-        } catch (java.io.IOException e) {
+            switch (choiceBox.getValue().toString()) {
+                case "int":
+                    bw.write("    " + choiceBox.getValue() + " " + someField.getText() + ';' + "\r\n");
+                    break;
+                case "char":
+                    bw.write("    char " + someField.getText() + ';' + "\r\n");
+                    break;
+                case "char[2]":
+                    bw.write("    char " + someField.getText() + "[2]" + ';' + "\r\n");
+                    break;
+                case "char[5]":
+                    bw.write("    char " + someField.getText() + "[5]" + ';' + "\r\n");
+                    break;
+                case "char[10]":
+                    bw.write("    char " + someField.getText() + "[10]" + ';' + "\r\n");
+                    break;
+                case "char[20]":
+                    bw.write("    char " + someField.getText() + "[20]" + ';' + "\r\n");
+                    break;
+                case "char[30]":
+                    bw.write("    char " + someField.getText() + "[30]" + ';' + "\r\n");
+                    break;
+            }
+        } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 
     private void writeFunctions(int fieldAmount, BufferedWriter bw) {
 
-//        try {
-//            Functions.outputEverything(bw);
-//            Functions.outputOne(fieldAmount, bw);
-//            Functions.inputAll(bw);
-//            Functions.makeARecord(bw, requiredNames);
-//            Functions.hello(bw);
-//            Functions.writeMain(bw);
-//
-//            FunctionsExtended.structOLS2(bw);
-//            FunctionsExtended.createOLS2(bw);
-//            FunctionsExtended.printOLS(bw, requiredNames);
-//            FunctionsExtended.structOLS1(bw);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            Functions.write(bw, fieldAmount, requiredNames);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    void organizePair(String Text, String Variable) throws Exception { // I really need it to make a Functions.makeARecord() function
+    private void organizePair(String Text, String Variable) throws Exception { // I really need it to make a Functions.makeARecord() function
         switch (Variable) {
             case "int":
                 requiredNames.add(new VariablePair(0, Text));
@@ -138,10 +154,14 @@ public class FXMLController {
         alert.setHeaderText("Руководство пользователя");
         alert.setContentText("Данная программа позволит Вам сгенерировать лабораторную работу по программированию.\r\n" +
                 "На данный момент реализован функционал 7 задачи (без поиска).\r\n" +
-                "Введите необходимые поля, нажмите \"Создать\" и вставьте полученный код в Visual Studio.\r\n" +
+                "Введите необходимые поля (слева - имя поля, справа - тип), нажмите \"Создать\" и вставьте полученный код в Visual Studio.\r\n" +
+                "Код проверен 17-Сентября-17 в среде CLion 2017.\r\n" +
                 "Также не забудьте создать в папке проекта файл \"table.dat\" для хранения информации.\r\n" +
-                "Версия: 1.1.0\r\n" +
-                "https://leff.su/");
+                "Пояснение: программа должна стать вашим помощником в понимании, а не просто инструментом для сдачи лабораторной работы. " +
+                "Я хочу, чтобы Вы поняли принцип готовой реализации и улучшили его.\r\n" +
+                "Нашли ошибку? Помогите исправить её. Напишите на любой из контактов, указанных на сайте -\r\n" +
+                "https://leff.su/\r\n" +
+                "Версия: 1.1.0 17-Sep-17");
 
         alert.showAndWait().ifPresent(rs -> {
             if (rs == ButtonType.OK) {
@@ -214,63 +234,7 @@ public class FXMLController {
 
     @FXML
     public void initialize() {
-        init_storage();
         init_choiceBoxes();
     }
 
-    public void something() {
-    }
-
-    private void init_storage() {
-
-        FileInputStream fstream = null;
-        try {
-            fstream = new FileInputStream("src/sample/LineStorage");
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
-
-        int i;
-        try {
-            for (i = 0; i < 3; i++) {
-                Functions.STRINGS_NAMESPACESTD[i] = br.readLine();
-            }
-            for (i = 0; i < 5; i++) {
-                Functions.STRING_OUTPUTEVERYTHING[i] = br.readLine();
-            }
-            for (i = 0; i < 1; i++) {
-                Functions.STRINGS_OUTPUTONE[i] = br.readLine();
-            }
-            for (i = 0; i < 7; i++) {
-                Functions.STRINGS_INPUTALL[i] = br.readLine();
-            }
-            for (i = 0; i < 4; i++) {
-                Functions.STRINGS_MAKEARECORD[i] = br.readLine();
-            }
-            for (i = 0; i < 8; i++) {
-                Functions.STRINGS_HELLO[i] = br.readLine();
-            }
-            for (i = 0; i < 5; i++) {
-                Functions.STRINGS_MAIN[i] = br.readLine();
-            }
-
-
-            for (i = 0; i < 4; i++) {
-                FunctionsExtended.STRINGSEXT_STRUCTOLS2[i] = br.readLine();
-            }
-            for (i = 0; i < 30; i++) {
-                FunctionsExtended.STRINGSEXT_CREATEOLS2[i] = br.readLine();
-            }
-            for (i = 0; i < 8; i++) {
-                FunctionsExtended.STRINGSEXT_PRINTOLS[i] = br.readLine();
-            }
-            for (i = 0; i < 3; i++) {
-                FunctionsExtended.STRINGSEXT_STRUCTOLS1[i] = br.readLine();
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 }

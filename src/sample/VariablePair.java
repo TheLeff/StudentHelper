@@ -1,25 +1,21 @@
 package sample;
 
-public class VariablePair {
+class VariablePair {
 
-    int VariableCode;
-    String VariableName;
+    private int VariableCode;
+    private String VariableName;
 
-    public VariablePair(int VariableCode, String VariableName) {
+    VariablePair(int VariableCode, String VariableName) {
         this.VariableCode = VariableCode;
         this.VariableName = VariableName;
     }
 
-    public int getCode() {
+    int getCode() {
         return this.VariableCode;
     }
 
-    public String getName() {
+    String getName() {
         return this.VariableName;
-    }
-
-    public int getIQ() {
-        return 0;
     }
 
 }
